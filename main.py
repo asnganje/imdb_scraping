@@ -26,27 +26,27 @@ options.add_experimental_option('detach', True)
 url = "https://www.imdb.com/"
 driver = webdriver.Chrome(options=options)
 actions = ActionChains(driver)
-driver.implicitly_wait(1)
+driver.implicitly_wait(0)
 driver.get(url)
 print("***Please complete the manual Human verification process***")
 input("Once IMDB has loaded, press enter to continue!")
 
 try:
-  WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.ID, "suggestion-search-button")))
+  WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.ID, "suggestion-search-button")))
   search_btn = driver.find_element(By.ID, "suggestion-search-button")
   search_btn.click()
 except Exception as e:
   print(f"Error: {e}")
 
 try:
-  WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//a[@data-testid='advanced-search-chip-tt']")))
+  WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.XPATH, "//a[@data-testid='advanced-search-chip-tt']")))
   advanced_search= driver.find_element(By.XPATH, "//a[@data-testid='advanced-search-chip-tt']")
   advanced_search.click()
 except Exception as e:
   print(f"Error: {e}")
 
 try:
-  WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='test-chip-id-movie']")))
+  WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='test-chip-id-movie']")))
   movie_btn= driver.find_element(By.XPATH, "//button[@data-testid='test-chip-id-movie']")
   movie_btn.click()
 except Exception as e:
@@ -56,10 +56,10 @@ try:
   genre_div=driver.find_element(By.XPATH, ("//div[text()='Genre']"))
   ActionChains(driver).move_to_element(genre_div).click().perform()
 
-  sleep(10)
+  sleep(3)
   ActionChains(driver).move_to_element(genre_div).click().perform()
 
-  WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='test-chip-id-Comedy']")))
+  WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='test-chip-id-Comedy']")))
   comedy_btn = driver.find_element(By.XPATH, "//button[@data-testid='test-chip-id-Comedy']")
   ActionChains(driver).move_to_element(comedy_btn).click().perform()
 except Exception as e:
@@ -67,9 +67,9 @@ except Exception as e:
 
 try:
   awards_div = driver.find_element(By.XPATH, "//div[text()='Awards & recognition']")
-  sleep(5)
+  sleep(2)
   ActionChains(driver).move_to_element(awards_div).click().perform()
-  WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='test-chip-id-oscar-nominated']")))
+  WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='test-chip-id-oscar-nominated']")))
   oscar_btn= driver.find_element(By.XPATH, "//button[@data-testid='test-chip-id-oscar-nominated']")
   ActionChains(driver).move_to_element(oscar_btn).click().perform()
 except Exception as e:
